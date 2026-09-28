@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VibeSpace ✨</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(
+                135deg,
+                #fff1f8,
+                #f3f0ff,
+                #eaf7ff
+            );
+            color: #25213b;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            height: 75px;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(15px);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+
+            box-shadow: 0 5px 25px rgba(120, 90, 160, 0.12);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+
+            background: linear-gradient(
+                90deg,
+                #ff4f9a,
+                #8b5cf6,
+                #22b8cf
+            );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .search {
+            width: 280px;
+            padding: 12px 20px;
+
+            border: none;
+            border-radius: 30px;
+
+            background: #f5f2fa;
+            outline: none;
+
+            font-size: 14px;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .nav-btn {
+            border: none;
+            background: white;
+
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+
+            cursor: pointer;
+            font-size: 18px;
+
+            transition: 0.3s;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(130, 90, 180, 0.2);
+        }
+
+        .profile-mini {
+            width: 43px;
+            height: 43px;
+
+            border-radius: 50%;
+
+            background: linear-gradient(
+                135deg,
+                #ff70a6,
+                #8b5cf6
+            );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+            font-weight: bold;
+        }
+
+        .logout-btn {
+            text-decoration: none;
+
+            background: #ffe8f2;
+            color: #d63384;
+
+            padding: 9px 15px;
+
+            border-radius: 20px;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #ffd1e4;
+            transform: translateY(-2px);
+        }
+
+        /* ================= MAIN ================= */
+
+        .container {
+            width: 90%;
+            max-width: 1250px;
+
+            margin: 35px auto;
+
+            display: grid;
+
+            grid-template-columns:
+                250px
+                1fr
+                280px;
+
+            gap: 25px;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            background: rgba(255, 255, 255, 0.82);
+
+            padding: 25px 18px;
+
+            border-radius: 25px;
+
+            height: fit-content;
+
+            box-shadow: 0 10px 30px rgba(120, 90, 160, 0.08);
+        }
+
+        .sidebar h3 {
+            margin-bottom: 20px;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+
+            gap: 13px;
+
+            padding: 13px;
+
+            margin: 7px 0;
+
+            border-radius: 15px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+            color: #5e5875;
+        }
+
+        .menu-item:hover,
+        .menu-item.active {
+            background: linear-gradient(
+                90deg,
+                #ffe1ef,
+                #eee4ff
+            );
+
+            color: #7c3aed;
+            font-weight: 600;
+        }
+
+        /* ================= WELCOME ================= */
+
+        .welcome {
+            padding: 28px;
+
+            border-radius: 25px;
+
+            margin-bottom: 20px;
+
+            color: white;
+
+            background: linear-gradient(
+                135deg,
+                #ff5fa2,
+                #8b5cf6,
+                #4cc9f0
+            );
+
+            box-shadow: 0 15px 35px rgba(139, 92, 246, 0.2);
+        }
+
+        .welcome h1 {
+            font-size: 30px;
+            margin-bottom: 7px;
+        }
+
+        .welcome p {
+            opacity: 0.92;
+        }
+
+        /* ================= STORIES ================= */
+
+        .stories {
+            display: flex;
+            gap: 15px;
+
+            overflow-x: auto;
+
+            padding: 5px 2px 20px;
+        }
+
+        .story {
+            min-width: 75px;
+            text-align: center;
+        }
+
+        .story-circle {
+            width: 65px;
+            height: 65px;
+
+            border-radius: 50%;
+
+            padding: 3px;
+
+            margin: auto;
+
+            background: linear-gradient(
+                135deg,
+                #ff4f9a,
+                #8b5cf6,
+                #22d3ee
+            );
+        }
+
+        .story-inner {
+            width: 100%;
+            height: 100%;
+
+            border-radius: 50%;
+
+            background: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 25px;
+        }
+
+        .story p {
+            font-size: 12px;
+            margin-top: 7px;
+        }
+
+        /* ================= CREATE POST ================= */
+
+        .create-post {
+            background: white;
+
+            border-radius: 22px;
+
+            padding: 20px;
+
+            margin-bottom: 20px;
+
+            box-shadow: 0 8px 25px rgba(100, 80, 140, 0.08);
+        }
+
+        .create-top {
+            display: flex;
+
+            gap: 12px;
+
+            align-items: center;
+        }
+
+        .avatar {
+            width: 45px;
+            height: 45px;
+
+            flex-shrink: 0;
+
+            border-radius: 50%;
+
+            background: linear-gradient(
+                135deg,
+                #ff70a6,
+                #845ef7
+            );
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+
+            font-weight: bold;
+        }
+
+        .post-input {
+            flex: 1;
+
+            padding: 13px 18px;
+
+            border: none;
+
+            background: #f6f4fa;
+
+            border-radius: 25px;
+
+            outline: none;
+
+            font-size: 14px;
+        }
+
+        .post-input:focus {
+            box-shadow: 0 0 0 3px #eee4ff;
+        }
+
+        .post-actions {
+            display: flex;
+
+            justify-content: space-around;
+
+            margin-top: 15px;
+        }
+
+        .post-action {
+            border: none;
+
+            background: none;
+
+            cursor: pointer;
+
+            color: #68627c;
+
+            font-weight: 500;
+
+            padding: 8px 15px;
+
+            border-radius: 12px;
+
+            transition: 0.3s;
+        }
+
+        .post-action:hover {
+            background: #f4edff;
+            color: #7c3aed;
+        }
+
+        .post-submit {
+            background: linear-gradient(
+                135deg,
+                #ff5fa2,
+                #8b5cf6
+            );
+
+            color: white;
+
+            padding: 9px 20px;
+
+            border-radius: 20px;
+        }
+
+        /* ================= POST ================= */
+
+        .post {
+            background: white;
+
+            border-radius: 22px;
+
+            padding: 20px;
+
+            margin-bottom: 20px;
+
+            box-shadow: 0 8px 25px rgba(100, 80, 140, 0.08);
+
+            transition: 0.3s;
+        }
+
+        .post:hover {
+            transform: translateY(-2px);
+
+            box-shadow: 0 12px 30px rgba(100, 80, 140, 0.12);
+        }
+
+        .post-header {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+        }
+
+        .user-info {
+            display: flex;
+
+            gap: 12px;
+
+            align-items: center;
+        }
+
+        .user-info h4 {
+            margin-bottom: 3px;
+        }
+
+        .time {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .more {
+            border: none;
+            background: none;
+
+            font-size: 20px;
+
+            cursor: pointer;
+        }
+
+        .post-text {
+            margin: 18px 0;
+
+            line-height: 1.6;
+
+            color: #55506a;
+
+            word-wrap: break-word;
+        }
+
+        .post-image {
+            width: 100%;
+            height: 220px;
+
+            border-radius: 18px;
+
+            background: linear-gradient(
+                135deg,
+                #ffd6e7,
+                #dcd2ff,
+                #c8f3ff
+            );
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 70px;
+
+            overflow: hidden;
+        }
+
+        .post-image img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            border-radius: 18px;
+        }
+
+        .post-stats {
+            display: flex;
+
+            justify-content: space-between;
+
+            padding: 13px 5px;
+
+            color: #777;
+
+            font-size: 13px;
+        }
+
+        .post-buttons {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            border-top: 1px solid #eee;
+
+            padding-top: 10px;
+        }
+
+        .post-buttons > form:first-child {
+            flex: 0 0 auto;
+        }
+
+        .like-btn {
+            border: none;
+
+            background: none;
+
+            cursor: pointer;
+
+            padding: 10px 15px;
+
+            border-radius: 12px;
+
+            color: #666;
+
+            font-size: 14px;
+
+            transition: 0.3s;
+        }
+
+        .like-btn:hover {
+            background: #fff0f6;
+        }
+
+        .like-btn.liked {
+            color: #ff3f81;
+
+            font-weight: bold;
+        }
+
+        /* ================= COMMENTS ================= */
+
+        .comment-form {
+            display: flex;
+
+            gap: 8px;
+
+            flex: 1;
+        }
+
+        .comment-input {
+            flex: 1;
+
+            min-width: 0;
+
+            padding: 10px 14px;
+
+            border: none;
+
+            background: #f6f4fa;
+
+            border-radius: 20px;
+
+            outline: none;
+
+            font-size: 13px;
+        }
+
+        .comment-input:focus {
+            box-shadow: 0 0 0 2px #eee4ff;
+        }
+
+        .comment-submit {
+            border: none;
+
+            background: #7c3aed;
+
+            color: white;
+
+            padding: 9px 14px;
+
+            border-radius: 18px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .comment-submit:hover {
+            background: #5b21b6;
+        }
+
+        .comment-list {
+            margin-top: 15px;
+
+            padding-top: 10px;
+
+            border-top: 1px solid #f0edf5;
+        }
+
+        .comment {
+            display: flex;
+
+            gap: 10px;
+
+            margin: 10px 0;
+
+            align-items: flex-start;
+        }
+
+        .comment-avatar {
+            width: 32px;
+            height: 32px;
+
+            flex-shrink: 0;
+
+            border-radius: 50%;
+
+            background: linear-gradient(
+                135deg,
+                #ff70a6,
+                #845ef7
+            );
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+        .comment-content {
+            background: #f7f5fb;
+
+            padding: 8px 12px;
+
+            border-radius: 14px;
+
+            font-size: 13px;
+
+            flex: 1;
+        }
+
+        .comment-content strong {
+            color: #5b21b6;
+        }
+
+        .comment-text {
+            margin-top: 3px;
+
+            color: #55506a;
+
+            word-break: break-word;
+        }
+
+        /* ================= EMPTY POSTS ================= */
+
+        .empty-posts {
+            background: white;
+
+            border-radius: 22px;
+
+            padding: 45px 25px;
+
+            text-align: center;
+
+            box-shadow: 0 8px 25px rgba(100, 80, 140, 0.08);
+        }
+
+        .empty-posts .emoji {
+            font-size: 50px;
+            margin-bottom: 12px;
+        }
+
+        .empty-posts h3 {
+            margin-bottom: 8px;
+        }
+
+        .empty-posts p {
+            color: #777;
+        }
+
+        /* ================= RIGHT PANEL ================= */
+
+        .right-card {
+            background: rgba(255, 255, 255, 0.85);
+
+            padding: 22px;
+
+            border-radius: 22px;
+
+            margin-bottom: 20px;
+
+            box-shadow: 0 10px 25px rgba(120, 90, 160, 0.08);
+        }
+
+        .right-card h3 {
+            margin-bottom: 18px;
+        }
+
+        .suggestion {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin: 15px 0;
+        }
+
+        .suggestion-user {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+        .small-avatar {
+            width: 38px;
+            height: 38px;
+
+            border-radius: 50%;
+
+            background: linear-gradient(
+                135deg,
+                #ff9a9e,
+                #fad0c4
+            );
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            color: #5b21b6;
+            font-weight: bold;
+        }
+
+        .suggestion-user small {
+            display: block;
+
+            color: #999;
+
+            margin-top: 2px;
+        }
+
+        .follow-btn {
+    border: none;
+
+    background: linear-gradient(
+        135deg,
+        #ff5fa2,
+        #8b5cf6
+    );
+
+    color: white;
+
+    padding: 8px 15px;
+
+    border-radius: 20px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition: 0.3s;
+
+    min-width: 82px;
+}
+
+.follow-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 15px rgba(139, 92, 246, 0.25);
+}
+
+.follow-btn:active {
+    transform: scale(0.96);
+}
+
+        :hover {
+            background: #5b21b6;
+
+            transform: translateY(-2px);
+        }
+
+        /* ================= LOGIN MESSAGE ================= */
+
+        .login-message {
+            background: white;
+
+            padding: 15px 20px;
+
+            border-radius: 18px;
+
+           .follow-btn margin-bottom: 20px;
+
+            text-align: center;
+
+            box-shadow: 0 8px 20px rgba(100, 80, 140, 0.08);
+        }
+
+        .login-message a {
+            color: #7c3aed;
+
+            font-weight: 600;
+
+            text-decoration: none;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1000px) {
+
+            .container {
+                grid-template-columns:
+                    200px
+                    1fr;
+            }
+
+            .right-column {
+                display: none;
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            nav {
+                padding: 0 20px;
+            }
+
+            .search {
+                display: none;
+            }
+
+            .nav-btn {
+                display: none;
+            }
+
+            .container {
+                display: block;
+
+                width: 94%;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .logout-btn {
+                display: none;
+            }
+
+            .welcome h1 {
+                font-size: 24px;
+            }
+
+            .post-actions {
+                justify-content: space-between;
+            }
+
+            .post-buttons {
+                flex-wrap: wrap;
+            }
+
+            .comment-form {
+                width: 100%;
+                order: 3;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav>
+
+    <div class="logo">
+        VibeSpace ✨
+    </div>
+
+    <form
+    method="GET"
+    action="{% url 'home' %}"
+>
+
+    <input
+        type="text"
+        name="q"
+        class="search"
+        placeholder="🔍 Search posts..."
+        value="{{ search_query }}"
+    >
+
+</form>
+
+    <div class="nav-icons">
+
+        <button
+            class="nav-btn"
+            type="button"
+        >
+            🏠
+        </button>
+
+        <button
+            class="nav-btn"
+            type="button"
+        >
+            💬
+        </button>
+
+        <button
+            class="nav-btn"
+            type="button"
+        >
+            🔔
+        </button>
+{% if user.is_authenticated %}
+
+    <a
+        href="{% url 'profile' user.id %}"
+        style="text-decoration: none;"
+    >
+        <div class="profile-mini">
+            {{ user.username|first|upper }}
+        </div>
+    </a>
+
+    <a
+        href="{% url 'logout' %}"
+        class="logout-btn"
+    >
+        Logout
+    </a>
+
+        {% else %}
+
+            <a
+                href="{% url 'login' %}"
+                class="logout-btn"
+            >
+                Login
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</nav>
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="container">
+
+
+    <!-- ================= LEFT SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <h3>
+            Explore 🌈
+        </h3>
+
+        <a
+    href="{% url 'home' %}"
+    class="menu-item active"
+    style="text-decoration: none;"
+>
+    🏠 <span>Home</span>
+</a>
+
+        <div class="menu-item">
+            🔥 <span>Trending</span>
+        </div>
+<a
+    href="{% if user.is_authenticated %}{% url 'profile' user.id %}{% else %}{% url 'login' %}{% endif %}"
+    class="menu-item"
+    style="text-decoration: none;"
+>
+    👤 <span>My Profile</span>
+</a>
+
+        <a
+    href="{% if user.is_authenticated %}{% url 'liked_posts' %}{% else %}{% url 'login' %}{% endif %}"
+    class="menu-item"
+    style="text-decoration: none;"
+>
+    ❤️ <span>Liked Posts</span>
+</a>
+
+       <a
+    href="{% if user.is_authenticated %}{% url 'following' %}{% else %}{% url 'login' %}{% endif %}"
+    class="menu-item"
+    style="text-decoration: none;"
+>
+    👥 <span>Following</span>
+</a>
+
+        <div class="menu-item">
+            ⚙️ <span>Settings</span>
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN FEED ================= -->
+
+    <main>
+
+
+        <!-- WELCOME -->
+
+        <section class="welcome">
+
+            {% if user.is_authenticated %}
+
+                <h1>
+                    Welcome back, {{ user.username }}! ✨
+                </h1>
+
+                <p>
+                    Share your moments, discover new people,
+                    and spread some good vibes.
+                </p>
+
+            {% else %}
+
+                <h1>
+                    Welcome to VibeSpace ✨
+                </h1>
+
+                <p>
+                    Share your moments, discover new people,
+                    and spread some good vibes.
+                </p>
+
+            {% endif %}
+
+        </section>
+
+
+        <!-- ================= STORIES ================= -->
+
+        <div class="stories">
+
+            <div class="story">
+
+                <div class="story-circle">
+
+                    <div class="story-inner">
+                        ➕
+                    </div>
+
+                </div>
+
+                <p>Your Story</p>
+
+            </div>
+
+            <div class="story">
+
+                <div class="story-circle">
+
+                    <div class="story-inner">
+                        🌸
+                    </div>
+
+                </div>
+
+                <p>Priya</p>
+
+            </div>
+
+            <div class="story">
+
+                <div class="story-circle">
+
+                    <div class="story-inner">
+                        🌻
+                    </div>
+
+                </div>
+
+                <p>Rahul</p>
+
+            </div>
+
+            <div class="story">
+
+                <div class="story-circle">
+
+                    <div class="story-inner">
+                        🎨
+                    </div>
+
+                </div>
+
+                <p>Meera</p>
+
+            </div>
+
+            <div class="story">
+
+                <div class="story-circle">
+
+                    <div class="story-inner">
+                        🏔️
+                    </div>
+
+                </div>
+
+                <p>Arjun</p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= CREATE POST ================= -->
+
+        {% if user.is_authenticated %}
+
+            <div class="create-post">
+
+                <form
+                    method="POST"
+                    action="{% url 'create_post' %}"
+                >
+
+                    {% csrf_token %}
+
+                    <div class="create-top">
+
+                        <div class="avatar">
+                            {{ user.username|first|upper }}
+                        </div>
+
+                        <input
+                            type="text"
+                            name="content"
+                            class="post-input"
+                            placeholder="What's on your mind?"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="post-actions">
+
+                        <button
+                            type="submit"
+                            class="post-action post-submit"
+                        >
+                            ✨ Post
+                        </button>
+
+                        <button
+                            type="button"
+                            class="post-action"
+                        >
+                            📷 Photo
+                        </button>
+
+                        <button
+                            type="button"
+                            class="post-action"
+                        >
+                            😊 Feeling
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        {% else %}
+
+            <div class="login-message">
+
+                Please
+
+                <a href="{% url 'login' %}">
+                    log in
+                </a>
+
+                to create a post ✨
+
+            </div>
+
+        {% endif %}
+
+
+        <!-- ================= DATABASE POSTS ================= -->
+
+        {% if posts %}
+
+            {% for post in posts %}
+
+                <article class="post">
+
+
+                    <!-- POST HEADER -->
+
+                    <div class="post-header">
+
+                        <div class="user-info">
+
+                            <div class="avatar">
+                                {{ post.user.username|first|upper }}
+                            </div>
+
+                            <div>
+
+                                <h4>
+    <a
+        href="{% url 'profile' post.user.id %}"
+        style="
+            color: #25213b;
+            text-decoration: none;
+        "
+    >
+        {{ post.user.username }}
+    </a>
+</h4>
+                                <span class="time">
+                                    {{ post.created_at|timesince }} ago
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <button
+                            class="more"
+                            type="button"
+                        >
+                            •••
+                        </button>
+
+                    </div>
+
+
+                    <!-- POST CONTENT -->
+
+                    <p class="post-text">
+                        {{ post.content }}
+                    </p>
+
+
+                    <!-- POST IMAGE -->
+
+                    {% if post.image %}
+
+                        <div class="post-image">
+
+                            <img
+                                src="{{ post.image }}"
+                                alt="Post image"
+                            >
+
+                        </div>
+
+                    {% else %}
+
+                        <div class="post-image">
+                            ✨
+                        </div>
+
+                    {% endif %}
+
+
+                    <!-- POST STATS -->
+
+                    <div class="post-stats">
+
+                        <span>
+                            ❤️ {{ post.likes.count }} likes
+                        </span>
+
+                        <span>
+                            {{ post.comments.count }} comments
+                        </span>
+
+                    </div>
+
+
+                    <!-- COMMENTS DISPLAY -->
+
+                    {% if post.comments.exists %}
+
+                        <div class="comment-list">
+
+                            {% for comment in post.comments.all %}
+
+                                <div class="comment">
+
+                                    <div class="comment-avatar">
+                                        {{ comment.user.username|first|upper }}
+                                    </div>
+
+                                    <div class="comment-content">
+
+                                        <strong>
+                                            {{ comment.user.username }}
+                                        </strong>
+
+                                        <div class="comment-text">
+                                            {{ comment.content }}
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <!-- POST BUTTONS -->
+
+                    <div class="post-buttons">
+
+
+                        <!-- LIKE -->
+
+                        {% if user.is_authenticated %}
+
+                            <form
+                                method="POST"
+                                action="{% url 'like_post' post.id %}"
+                            >
+
+                                {% csrf_token %}
+
+                                <button
+                                    type="submit"
+                                    class="like-btn {% if post.id in liked_posts %}liked{% endif %}"
+                                >
+
+                                    {% if post.id in liked_posts %}
+                                        ❤️ Liked
+                                    {% else %}
+                                        ❤️ Like
+                                    {% endif %}
+
+                                </button>
+
+                            </form>
+
+                        {% else %}
+
+                            <button
+                                class="like-btn"
+                                type="button"
+                                onclick="window.location.href='{% url 'login' %}'"
+                            >
+                                ❤️ Like
+                            </button>
+
+                        {% endif %}
+
+
+                        <!-- COMMENT -->
+
+                        {% if user.is_authenticated %}
+
+                            <form
+                                method="POST"
+                                action="{% url 'create_comment' post.id %}"
+                                class="comment-form"
+                            >
+
+                                {% csrf_token %}
+
+                                <input
+                                    type="text"
+                                    name="content"
+                                    class="comment-input"
+                                    placeholder="Write a comment..."
+                                    required
+                                >
+
+                                <button
+                                    type="submit"
+                                    class="comment-submit"
+                                >
+                                    💬
+                                </button>
+
+                            </form>
+
+                        {% else %}
+
+                            <button
+                                class="like-btn"
+                                type="button"
+                                onclick="window.location.href='{% url 'login' %}'"
+                            >
+                                💬 Comment
+                            </button>
+
+                        {% endif %}
+
+
+                        <!-- SHARE -->
+
+                        <button
+                            class="like-btn"
+                            type="button"
+                        >
+                            ↗️ Share
+                        </button>
+
+
+                    </div>
+
+
+                </article>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="empty-posts">
+
+                <div class="emoji">
+                    🌸
+                </div>
+
+                <h3>
+                    No posts yet
+                </h3>
+
+                <p>
+                    Be the first person to share something
+                    with the VibeSpace community! ✨
+                </p>
+
+            </div>
+
+        {% endif %}
+
+
+    </main>
+
+
+    <!-- ================= RIGHT COLUMN ================= -->
+
+    <aside class="right-column">
+
+
+        <div class="right-card">
+
+    <h3>
+        People you may know 👋
+    </h3>
+
+    {% for person in suggestions %}
+
+        <div class="suggestion">
+
+            <div class="suggestion-user">
+
+                <div class="small-avatar">
+                    {{ person.username|first|upper }}
+                </div>
+
+                <div>
+
+                    <strong>
+    <a
+        href="{% url 'profile' person.id %}"
+        style="
+            color: #25213b;
+            text-decoration: none;
+        "
+    >
+        {{ person.username }}
+    </a>
+</strong>
+
+                    <small>
+                        VibeSpace Member
+                    </small>
+
+                </div>
+
+            </div>
+
+            {% if user.is_authenticated %}
+
+                <form
+                    method="POST"
+                    action="{% url 'follow_user' person.id %}"
+                >
+
+                    {% csrf_token %}
+
+                    <button
+                        type="submit"
+                        class="follow-btn"
+                    >
+
+                        {% if person.id in following_users %}
+                            Following
+                        {% else %}
+                            Follow
+                        {% endif %}
+
+                    </button>
+
+                </form>
+
+            {% else %}
+
+                <a
+                    href="{% url 'login' %}"
+                    class="follow-btn"
+                >
+                    Follow
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    {% empty %}
+
+        <p style="color: #777; font-size: 14px;">
+            No other users yet. Invite your friends to VibeSpace! ✨
+        </p>
+
+    {% endfor %}
+
+</div>
+
+
+            <!-- MEERA -->
+
+            <div class="suggestion">
+
+                <div class="suggestion-user">
+
+                    <div class="small-avatar">
+                        M
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Meera
+                        </strong>
+
+                        <small>
+                            Designer
+                        </small>
+
+                    </div>
+
+                </div>
+
+                {% if user.is_authenticated %}
+
+                    <button
+                        class="follow-btn"
+                        type="button"
+                    >
+                        Follow
+                    </button>
+
+                {% else %}
+
+                    <a
+                        href="{% url 'login' %}"
+                        class="follow-btn"
+                    >
+                        Follow
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- ARJUN -->
+
+            <div class="suggestion">
+
+                <div class="suggestion-user">
+
+                    <div class="small-avatar">
+                        A
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Arjun
+                        </strong>
+
+                        <small>
+                            Developer
+                        </small>
+
+                    </div>
+
+                </div>
+
+                {% if user.is_authenticated %}
+
+                    <button
+                        class="follow-btn"
+                        type="button"
+                    >
+                        Follow
+                    </button>
+
+                {% else %}
+
+                    <a
+                        href="{% url 'login' %}"
+                        class="follow-btn"
+                    >
+                        Follow
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- SNEHA -->
+
+            <div class="suggestion">
+
+                <div class="suggestion-user">
+
+                    <div class="small-avatar">
+                        S
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Sneha
+                        </strong>
+
+                        <small>
+                            Student
+                        </small>
+
+                    </div>
+
+                </div>
+
+                {% if user.is_authenticated %}
+
+                    <button
+                        class="follow-btn"
+                        type="button"
+                    >
+                        Follow
+                    </button>
+
+                {% else %}
+
+                    <a
+                        href="{% url 'login' %}"
+                        class="follow-btn"
+                    >
+                        Follow
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ================= TODAY'S VIBES ================= -->
+
+        <div class="right-card">
+
+            <h3>
+                Today's Vibes ✨
+            </h3>
+
+            <p>
+                🌸 #GoodVibes
+            </p>
+
+            <p>
+                📚 #StudyLife
+            </p>
+
+            <p>
+                🌄 #Travel
+            </p>
+
+            <p>
+                💻 #Coding
+            </p>
+
+        </div>
+
+
+    </aside>
+
+
+</div>
+
+
+</body>
+
+</html>

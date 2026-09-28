@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | VibeSpace</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background:
+                radial-gradient(circle at top left, #ffd6e8, transparent 35%),
+                radial-gradient(circle at bottom right, #d9d2ff, transparent 35%),
+                linear-gradient(135deg, #fff5fa, #f4f1ff, #eafaff);
+
+            padding: 30px;
+        }
+
+        .register-container {
+            width: 100%;
+            max-width: 1050px;
+            min-height: 650px;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(20px);
+
+            border-radius: 35px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 25px 70px rgba(100, 70, 150, 0.18);
+        }
+
+        /* LEFT SIDE */
+
+        .welcome-section {
+            padding: 60px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff4f9a,
+                    #8b5cf6,
+                    #4cc9f0
+                );
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 40px;
+        }
+
+        .welcome-section h1 {
+            font-size: 46px;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .welcome-section p {
+            font-size: 17px;
+            line-height: 1.7;
+            opacity: 0.95;
+            max-width: 400px;
+        }
+
+        .features {
+            margin-top: 35px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            margin: 15px 0;
+
+            font-size: 15px;
+        }
+
+        .feature-icon {
+            width: 38px;
+            height: 38px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(255, 255, 255, 0.2);
+
+            font-size: 18px;
+        }
+
+        /* RIGHT SIDE */
+
+        .form-section {
+            padding: 55px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-section h2 {
+            font-size: 32px;
+            color: #29233f;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #77718a;
+            margin-bottom: 30px;
+        }
+
+        .message {
+            padding: 12px 15px;
+            border-radius: 12px;
+            margin-bottom: 18px;
+
+            background: #ffe6ef;
+            color: #c02661;
+
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            color: #514a68;
+        }
+
+        .form-group input {
+            width: 100%;
+
+            padding: 14px 16px;
+
+            border: 2px solid #eeeaf5;
+            border-radius: 14px;
+
+            outline: none;
+
+            background: #faf9fd;
+
+            font-size: 14px;
+
+            transition: 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #9b6cff;
+            background: white;
+
+            box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.08);
+        }
+
+        .register-button {
+            width: 100%;
+
+            padding: 15px;
+
+            border: none;
+            border-radius: 15px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ff4f9a,
+                    #8b5cf6
+                );
+
+            color: white;
+
+            font-size: 16px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            margin-top: 8px;
+
+            transition: 0.3s;
+
+            box-shadow:
+                0 10px 25px rgba(139, 92, 246, 0.25);
+        }
+
+        .register-button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 15px 30px rgba(139, 92, 246, 0.35);
+        }
+
+        .login-text {
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: #77718a;
+
+            font-size: 14px;
+        }
+
+        .login-text a {
+            color: #7c3aed;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .login-text a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 800px) {
+
+            .register-container {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome-section {
+                padding: 40px;
+            }
+
+            .welcome-section h1 {
+                font-size: 36px;
+            }
+
+            .form-section {
+                padding: 40px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="register-container">
+
+        <!-- LEFT SIDE -->
+
+        <section class="welcome-section">
+
+            <div class="logo">
+                VibeSpace ✨
+            </div>
+
+            <h1>
+                Your space.<br>
+                Your people.<br>
+                Your vibes.
+            </h1>
+
+            <p>
+                Join VibeSpace and connect with people,
+                share your moments, discover new interests,
+                and spread some good vibes.
+            </p>
+
+            <div class="features">
+
+                <div class="feature">
+                    <div class="feature-icon">📸</div>
+                    <span>Share your favorite moments</span>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">💬</div>
+                    <span>Connect and interact with people</span>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">✨</div>
+                    <span>Discover what's trending</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RIGHT SIDE -->
+
+        <section class="form-section">
+
+            <h2>Create Account 🚀</h2>
+
+            <p class="subtitle">
+                Join the VibeSpace community today.
+            </p>
+
+
+            {% if messages %}
+
+                {% for message in messages %}
+
+                    <div class="message">
+                        {{ message }}
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="form-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Choose a username"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Create a password"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="confirm_password">
+                        Confirm Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirm_password"
+                        name="confirm_password"
+                        placeholder="Re-enter your password"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="register-button">
+
+                    Create My Account ✨
+
+                </button>
+
+            </form>
+
+
+            <p class="login-text">
+
+                Already have an account?
+
+                <a href="{% url 'login' %}">
+                    Log in
+                </a>
+
+            </p>
+
+        </section>
+
+    </div>
+
+</body>
+
+</html>

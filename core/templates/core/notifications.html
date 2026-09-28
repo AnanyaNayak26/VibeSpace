@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Notifications | VibeSpace</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at top left, #ffd6e7, transparent 35%),
+                radial-gradient(circle at bottom right, #dcd4ff, transparent 35%),
+                #f8f7fc;
+            color: #25213b;
+        }
+
+        .navbar {
+            height: 75px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            box-shadow: 0 4px 20px rgba(80, 60, 120, 0.08);
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff4f9a, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .home-btn {
+            text-decoration: none;
+            background: linear-gradient(135deg, #ff5fa2, #8b5cf6);
+            color: white;
+            padding: 11px 22px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.25);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 45px auto;
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .heading h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .heading p {
+            color: #777;
+            font-size: 15px;
+        }
+
+        .notification-card {
+            background: white;
+            border-radius: 22px;
+            padding: 20px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 8px 25px rgba(70, 50, 100, 0.08);
+            transition: 0.3s;
+        }
+
+        .notification-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(70, 50, 100, 0.12);
+        }
+
+        .avatar {
+            width: 55px;
+            height: 55px;
+            min-width: 55px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6fa9, #8b5cf6);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .notification-text {
+            flex: 1;
+        }
+
+        .notification-text strong {
+            font-size: 16px;
+        }
+
+        .notification-text p {
+            margin-top: 5px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .time {
+            color: #999;
+            font-size: 12px;
+            margin-top: 7px;
+        }
+
+        .empty-box {
+            background: white;
+            padding: 55px 25px;
+            text-align: center;
+            border-radius: 25px;
+            box-shadow: 0 8px 25px rgba(70, 50, 100, 0.08);
+        }
+
+        .empty-icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+
+        .empty-box h2 {
+            margin-bottom: 10px;
+        }
+
+        .empty-box p {
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 0 5%;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+            .container {
+                width: 92%;
+                margin-top: 30px;
+            }
+
+            .notification-card {
+                padding: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="navbar">
+
+        <div class="logo">
+            ✨ VibeSpace
+        </div>
+
+        <a
+            href="{% url 'home' %}"
+            class="home-btn"
+        >
+            🏠 Home
+        </a>
+
+    </div>
+
+
+    <div class="container">
+
+        <div class="heading">
+
+            <h1>🔔 Notifications</h1>
+
+            <p>
+                Stay updated with what's happening on VibeSpace
+            </p>
+
+        </div>
+
+
+        {% for notification in notifications %}
+
+            <div class="notification-card">
+
+                <div class="avatar">
+                    {{ notification.sender.username|first|upper }}
+                </div>
+
+                <div class="notification-text">
+
+                    <strong>
+                        {{ notification.sender.username }}
+                    </strong>
+
+                    {% if notification.notification_type == "follow" %}
+
+                        <p>
+                            started following you 👥
+                        </p>
+
+                    {% elif notification.notification_type == "like" %}
+
+                        <p>
+                            liked your post ❤️
+                        </p>
+
+                    {% elif notification.notification_type == "comment" %}
+
+                        <p>
+                            commented on your post 💬
+                        </p>
+
+                    {% endif %}
+
+                    <div class="time">
+                        {{ notification.created_at|timesince }} ago
+                    </div>
+
+                </div>
+
+            </div>
+
+        {% empty %}
+
+            <div class="empty-box">
+
+                <div class="empty-icon">
+                    🔔
+                </div>
+
+                <h2>
+                    No notifications yet
+                </h2>
+
+                <p>
+                    When someone interacts with you,
+                    you'll see it here.
+                </p>
+
+                <a
+                    href="{% url 'home' %}"
+                    class="home-btn"
+                >
+                    Explore VibeSpace
+                </a>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</body>
+
+</html>
